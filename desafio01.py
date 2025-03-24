@@ -1,5 +1,6 @@
 menu = """
-
+[c] Criar Conta
+[l] Listar Contas
 [d] Depositar
 [s] Sacar
 [e] Extrato
@@ -12,11 +13,48 @@ limite = 500
 extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
+contas = []
+clientes = []
 
 while True:
 
     opcao = input(menu)
-
+    
+    if opcao == "c":
+        def criar_conta():
+            nome_cliente = input("Digite o nome do cliente: ")
+            cpf_cliente = input("Digite o CPF do cliente: ")
+            if cpf_cliente != "":
+                print("Vamos cadstrar o seu endereço:")
+                rua_cliente = input("Digite o nome da rua: ")
+                numero_cliente = input("Digite o número: ")
+                
+                clientes.append({
+                    "nome": nome_cliente,
+                    "cpf": cpf_cliente,
+                    "endereco": {
+                        "rua": rua_cliente,
+                        "numero": numero_cliente
+                    }
+                })
+                
+                contas.append({
+                    "cpf": cpf_cliente,
+                    "saldo": 0
+                })
+        criar_conta()
+        
+    if opcao == "l":
+        def listar_contas():
+            for conta in contas:
+                if conta == "":
+                    print("Nenhuma conta cadastrada.")
+                else:    
+                    print(f"CPF: {conta['cpf']}")
+                    print(f"Saldo: R$ {conta['saldo']:.2f}")
+                    print("-------------------")
+        listar_contas()        
+    
     if opcao == "d":
         valor = float(input("Informe o valor do depósito: "))
 
